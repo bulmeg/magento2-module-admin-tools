@@ -120,7 +120,7 @@
                     <label>Statuses Not Counted</label>
                     <source_model>Bulmeg\AdminTools\Model\Config\Source\OrderStatus</source_model>
                     <can_be_empty>1</can_be_empty>
-                    <comment>Orders in these statuses are listed but neither successful nor problematic, e.g. "Pending" for orders that are still waiting to be processed. Every other status counts as problematic.</comment>
+                    <comment>Orders in these statuses are listed but neither successful nor problematic, e.g. "Pending" for orders waiting for another delivery day or for a product to arrive. Every other status counts as problematic.</comment>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>

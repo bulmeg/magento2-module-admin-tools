@@ -18,7 +18,7 @@
                 <match_email>1</match_email>
                 <match_phone>1</match_phone>
                 <reliable_statuses>processing,complete</reliable_statuses>
-                <neutral_statuses/>
+                <neutral_statuses>pending</neutral_statuses>
                 <regular_min_orders>1</regular_min_orders>
                 <limit>20</limit>
                 <ignored_values/>

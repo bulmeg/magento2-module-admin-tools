@@ -35,7 +35,7 @@
 "Orange","Orange"
 "Order #","Order #"
 "Order Status","Order Status"
-"Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders that are still waiting to be processed. Every other status counts as problematic.","Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders that are still waiting to be processed. Every other status counts as problematic."
+"Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders waiting for another delivery day or for a product to arrive. Every other status counts as problematic.","Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders waiting for another delivery day or for a product to arrive. Every other status counts as problematic."
 "Orders placed from the same customer account.","Orders placed from the same customer account."
 "Orders placed with the same email address, guest orders included.","Orders placed with the same email address, guest orders included."
 "Orders to List","Orders to List"

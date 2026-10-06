@@ -35,7 +35,7 @@
 "Orange","Оранжев"
 "Order #","Поръчка №"
 "Order Status","Статус на поръчката"
-"Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders that are still waiting to be processed. Every other status counts as problematic.","Поръчките в тези статуси се показват, но не са нито успешни, нито проблемни — напр. „В очакване“ за поръчки, които още чакат обработка. Всеки друг статус се брои за проблемен."
+"Orders in these statuses are listed but neither successful nor problematic, e.g. ""Pending"" for orders waiting for another delivery day or for a product to arrive. Every other status counts as problematic.","Поръчките в тези статуси се показват, но не са нито успешни, нито проблемни — напр. „В очакване“ за поръчки, които чакат друг ден за доставка или доставка на продукт. Всеки друг статус се брои за проблемен."
 "Orders placed from the same customer account.","Поръчки от същия клиентски акаунт."
 "Orders placed with the same email address, guest orders included.","Поръчки със същия имейл, включително поръчките като гост."
 "Orders to List","Брой показани поръчки"
