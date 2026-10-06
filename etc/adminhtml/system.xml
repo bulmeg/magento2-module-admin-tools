@@ -146,7 +146,7 @@
                 <field id="ignored_values" translate="label comment" type="textarea" sortOrder="70"
                        showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Ignored Emails and Phones</label>
-                    <comment>One per line. Shared or placeholder details (e.g. an email used for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.</comment>
+                    <comment>One per line: an email, a phone or a whole email domain such as @example.com. Shared or placeholder details (e.g. emails generated for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.</comment>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>

@@ -31,7 +31,7 @@
 "New customer","New customer"
 "Not counted","Not counted"
 "Number of previous successful orders that makes a customer a regular one.","Number of previous successful orders that makes a customer a regular one."
-"One per line. Shared or placeholder details (e.g. an email used for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.","One per line. Shared or placeholder details (e.g. an email used for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching."
+"One per line: an email, a phone or a whole email domain such as @example.com. Shared or placeholder details (e.g. emails generated for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.","One per line: an email, a phone or a whole email domain such as @example.com. Shared or placeholder details (e.g. emails generated for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching."
 "Orange","Orange"
 "Order #","Order #"
 "Order Status","Order Status"

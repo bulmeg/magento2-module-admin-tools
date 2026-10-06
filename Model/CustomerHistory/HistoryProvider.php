@@ -11,6 +11,8 @@ use Magento\Sales\Model\Order;
 
 class HistoryProvider
 {
+    private array $histories = [];
+
     public function __construct(
         private readonly Config $config,
         private readonly CustomerOrders $customerOrders,
@@ -22,6 +24,9 @@ class HistoryProvider
     public function getHistory(OrderInterface $order): History
     {
         $orderId = (int)$order->getEntityId();
+        if ($orderId > 0 && isset($this->histories[$orderId])) {
+            return $this->histories[$orderId];
+        }
         $found = $this->findOrderIds($order, $orderId);
         $truncated = [];
         $matches = [];
@@ -35,7 +40,12 @@ class HistoryProvider
             }
         }
 
-        return $this->createHistory($this->customerOrders->getOrders(array_keys($matches)), $matches, $truncated);
+        $history = $this->createHistory($this->customerOrders->getOrders(array_keys($matches)), $matches, $truncated);
+        if ($orderId > 0) {
+            $this->histories[$orderId] = $history;
+        }
+
+        return $history;
     }
 
     private function findOrderIds(OrderInterface $order, int $orderId): array
@@ -156,7 +166,11 @@ class HistoryProvider
     private function isIgnoredEmail(string $email): bool
     {
         foreach ($this->config->getIgnoredValues() as $value) {
-            if (str_contains($value, '@') && $this->normalizeEmail($value) === $email) {
+            if (!str_contains($value, '@')) {
+                continue;
+            }
+            $value = $this->normalizeEmail($value);
+            if (str_starts_with($value, '@') ? str_ends_with($email, $value) : $value === $email) {
                 return true;
             }
         }

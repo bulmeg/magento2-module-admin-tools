@@ -17,18 +17,20 @@
                 </arguments>
             </block>
         </referenceContainer>
-        <referenceContainer name="order_additional_info">
-            <block class="Magento\Backend\Block\Template"
+        <referenceBlock name="sales_order_tabs">
+            <block class="Bulmeg\AdminTools\Block\Adminhtml\Order\View\Tab\CustomerHistory"
                    name="bulmeg_admintools.customer_history"
-                   template="Bulmeg_AdminTools::order/view/history.phtml"
-                   before="-"
-                   ifconfig="bulmeg_admintools/customer_history/enabled"
-                   aclResource="Bulmeg_AdminTools::customer_history">
+                   template="Bulmeg_AdminTools::order/view/history.phtml">
                 <arguments>
                     <argument name="view_model" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistory</argument>
                     <argument name="formatter" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistoryFormatter</argument>
                 </arguments>
             </block>
-        </referenceContainer>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">bulmeg_customer_history</argument>
+                <argument name="block" xsi:type="string">bulmeg_admintools.customer_history</argument>
+                <argument name="after" xsi:type="string">order_info</argument>
+            </action>
+        </referenceBlock>
     </body>
 </page>

@@ -31,7 +31,7 @@
 "New customer","Нов клиент"
 "Not counted","Не се брои"
 "Number of previous successful orders that makes a customer a regular one.","Брой предишни успешни поръчки, от които клиентът става редовен."
-"One per line. Shared or placeholder details (e.g. an email used for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.","По един на ред. Общи или служебни данни (напр. имейл за поръчки по телефон или номерът на самия магазин) биха свързали различни клиенти; такива стойности не се използват за разпознаване."
+"One per line: an email, a phone or a whole email domain such as @example.com. Shared or placeholder details (e.g. emails generated for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.","По един на ред: имейл, телефон или цял домейн като @example.com. Общи или служебни данни (напр. имейлите, създавани за поръчки по телефон, или номерът на самия магазин) биха свързали различни клиенти; такива стойности не се използват за разпознаване."
 "Orange","Оранжев"
 "Order #","Поръчка №"
 "Order Status","Статус на поръчката"

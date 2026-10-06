@@ -121,6 +121,41 @@ class HistoryProviderTest extends TestCase
         $this->assertSame([], $history->getOrders());
     }
 
+    public function testHistoryIsBuiltOncePerOrder(): void
+    {
+        $this->config->method('getHistoryMatchBy')->willReturn([MatchBy::EMAIL]);
+        $this->config->method('getIgnoredValues')->willReturn([]);
+        $this->customerOrders->expects($this->once())->method('getIdsByEmail')->willReturn([1]);
+        $this->customerOrders->expects($this->once())->method('getOrders')->willReturn([$this->row(1, 'complete')]);
+        $order = $this->getOrder(null, 'ivan@example.com', '');
+
+        $first = $this->provider->getHistory($order);
+
+        $this->assertSame($first, $this->provider->getHistory($order));
+    }
+
+    public function testWholeEmailDomainCanBeIgnored(): void
+    {
+        $this->config->method('getHistoryMatchBy')->willReturn([MatchBy::EMAIL]);
+        $this->config->method('getIgnoredValues')->willReturn(['@Shop.bg']);
+        $this->customerOrders->expects($this->never())->method('getIdsByEmail');
+        $this->customerOrders->method('getOrders')->with([])->willReturn([]);
+
+        $history = $this->provider->getHistory($this->getOrder(null, 'phone-order-0888123456@shop.bg', ''));
+
+        $this->assertSame(Classifier::VERDICT_NEW, $history->getVerdict());
+    }
+
+    public function testDomainRuleDoesNotIgnoreOtherDomains(): void
+    {
+        $this->config->method('getHistoryMatchBy')->willReturn([MatchBy::EMAIL]);
+        $this->config->method('getIgnoredValues')->willReturn(['@shop.bg']);
+        $this->customerOrders->expects($this->once())->method('getIdsByEmail')->with('ivan@myshop.bg')->willReturn([]);
+        $this->customerOrders->method('getOrders')->willReturn([]);
+
+        $this->provider->getHistory($this->getOrder(null, 'ivan@myshop.bg', ''));
+    }
+
     public function testDisabledCriteriaAreNotQueried(): void
     {
         $this->config->method('getHistoryMatchBy')->willReturn([MatchBy::EMAIL]);

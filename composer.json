@@ -2,7 +2,7 @@
     "name": "bulmeg/module-admin-tools",
     "description": "Bulmeg Admin Tools for Magento 2: phone search in the order grid, colored order statuses and the customer's order history on the order page. Each tool is switched on or off separately.",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": [
         "proprietary"
     ],

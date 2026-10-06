@@ -19,6 +19,10 @@ class CustomerHistory implements ArgumentInterface
 {
     public const ACL_RESOURCE = 'Bulmeg_AdminTools::customer_history';
     public const ANCHOR = 'bulmeg-customer-history';
+    public const TAB = 'bulmeg_customer_history';
+    public const LINK_COMPONENT = 'Bulmeg_AdminTools/js/order/history-link';
+
+    private const TABS_ID = 'sales_order_view_tabs';
 
     private ?History $history = null;
     private bool $isLoaded = false;
@@ -79,6 +83,16 @@ class CustomerHistory implements ArgumentInterface
     public function getAnchor(): string
     {
         return self::ANCHOR;
+    }
+
+    public function getTabLinkId(): string
+    {
+        return self::TABS_ID . '_' . self::TAB;
+    }
+
+    public function getTabLinkInit(): string
+    {
+        return (string)json_encode([self::LINK_COMPONENT => ['tab' => $this->getTabLinkId()]]);
     }
 
     public function hasSeveralStores(History $history): bool

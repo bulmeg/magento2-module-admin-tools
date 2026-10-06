@@ -20,7 +20,9 @@ $otherOrders = __('Other orders: %1', $history->getTotalCount());
             <?= $escaper->escapeHtml($formatter->getVerdictLabel($history)) ?>
         </span>
         <?php if ($history->getTotalCount() > 0): ?>
-            <a class="bulmeg-history-summary-link" href="#<?= $escaper->escapeHtmlAttr($viewModel->getAnchor()) ?>">
+            <a class="bulmeg-history-summary-link"
+               href="#<?= $escaper->escapeHtmlAttr($viewModel->getTabLinkId()) ?>_content"
+               data-mage-init="<?= $escaper->escapeHtmlAttr($viewModel->getTabLinkInit()) ?>">
                 <?= $escaper->escapeHtml($otherOrders) ?>
             </a>
         <?php endif; ?>
