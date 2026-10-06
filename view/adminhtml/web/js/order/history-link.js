@@ -3,7 +3,7 @@ define([], function () {
 
     return function (config, element) {
         element.addEventListener('click', function (event) {
-            var tab = document.getElementById(config.tab);
+            var tab = document.querySelector('a.tab-item-link[href="#' + config.tab + '_content"]');
 
             if (!tab) {
                 return;
