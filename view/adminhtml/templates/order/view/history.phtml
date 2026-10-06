@@ -1,0 +1,111 @@
+<?php
+$viewModel = $block->getData('view_model');
+$formatter = $block->getData('formatter');
+if (!$viewModel instanceof \Bulmeg\AdminTools\ViewModel\CustomerHistory
+    || !$formatter instanceof \Bulmeg\AdminTools\ViewModel\CustomerHistoryFormatter
+) {
+    return;
+}
+$history = $viewModel->getHistory();
+if ($history === null) {
+    return;
+}
+$orders = $history->getOrders();
+$showStore = $viewModel->hasSeveralStores($history);
+$problemSummary = $formatter->getProblemSummary($history);
+$successfulTotal = $formatter->getSuccessfulTotal($history);
+$messageType = $formatter->getVerdictMessageType($history);
+?>
+<section class="admin__page-section bulmeg-history" id="<?= $escaper->escapeHtmlAttr($viewModel->getAnchor()) ?>">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Customer Order History')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="message message-<?= $escaper->escapeHtmlAttr($messageType) ?> bulmeg-history-verdict">
+            <div>
+                <strong><?= $escaper->escapeHtml($formatter->getVerdictLabel($history)) ?>.</strong>
+                <?= $escaper->escapeHtml($formatter->getVerdictMessage($history)) ?>
+            </div>
+        </div>
+
+        <?php if ($problemSummary !== ''): ?>
+            <p class="bulmeg-history-note">
+                <?= $escaper->escapeHtml(__('Problematic: %1', $problemSummary)) ?>
+            </p>
+        <?php endif; ?>
+        <?php if ($successfulTotal !== ''): ?>
+            <p class="bulmeg-history-note">
+                <?= $escaper->escapeHtml(__('Total of the successful orders: %1', $successfulTotal)) ?>
+            </p>
+        <?php endif; ?>
+        <?php foreach ($history->getTruncatedCriteria() as $criterion): ?>
+            <?php $note = __(
+                'Over %1 orders match by "%2": probably shared data. Add it to the ignored emails and phones.',
+                $viewModel->getMatchLimit(),
+                $formatter->getMatchedByLabel([$criterion])
+            ); ?>
+            <p class="bulmeg-history-note bulmeg-history-note-warning"><?= $escaper->escapeHtml($note) ?></p>
+        <?php endforeach; ?>
+
+        <?php if ($orders): ?>
+            <div class="admin__table-wrapper">
+                <table class="data-table admin__table-primary bulmeg-history-table">
+                    <thead>
+                        <tr class="headings">
+                            <th><?= $escaper->escapeHtml(__('Order #')) ?></th>
+                            <th><?= $escaper->escapeHtml(__('Purchase Date')) ?></th>
+                            <th><?= $escaper->escapeHtml(__('Customer')) ?></th>
+                            <?php if ($showStore): ?>
+                                <th><?= $escaper->escapeHtml(__('Store View')) ?></th>
+                            <?php endif; ?>
+                            <th><?= $escaper->escapeHtml(__('Status')) ?></th>
+                            <th class="bulmeg-history-amount"><?= $escaper->escapeHtml(__('Grand Total')) ?></th>
+                            <th><?= $escaper->escapeHtml(__('Assessment')) ?></th>
+                            <th><?= $escaper->escapeHtml(__('Matched by')) ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders as $order): ?>
+                            <?php
+                            $orderUrl = $viewModel->getOrderUrl($order['entity_id']);
+                            $statusClass = $formatter->getStatusClass($order['status']);
+                            $statusLabel = $formatter->getStatusLabel($order['status']);
+                            $grandTotal = $formatter->formatPrice($order['grand_total'], $order['currency']);
+                            $outcomeClass = 'bulmeg-history-outcome bulmeg-history-outcome-' . $order['outcome'];
+                            $matchedBy = $formatter->getMatchedByLabel($order['matched_by']);
+                            ?>
+                            <tr class="bulmeg-history-row-<?= $escaper->escapeHtmlAttr($order['outcome']) ?>">
+                                <td>
+                                    <a href="<?= $escaper->escapeUrl($orderUrl) ?>">
+                                        <?= $escaper->escapeHtml($order['increment_id']) ?>
+                                    </a>
+                                </td>
+                                <td><?= $escaper->escapeHtml($formatter->formatDate($order['created_at'])) ?></td>
+                                <td><?= $escaper->escapeHtml($order['customer_name']) ?></td>
+                                <?php if ($showStore): ?>
+                                    <td><?= $escaper->escapeHtml($order['store_name']) ?></td>
+                                <?php endif; ?>
+                                <td>
+                                    <span class="<?= $escaper->escapeHtmlAttr($statusClass) ?>">
+                                        <?= $escaper->escapeHtml($statusLabel) ?>
+                                    </span>
+                                </td>
+                                <td class="bulmeg-history-amount"><?= $escaper->escapeHtml($grandTotal) ?></td>
+                                <td>
+                                    <span class="<?= $escaper->escapeHtmlAttr($outcomeClass) ?>">
+                                        <?= $escaper->escapeHtml($formatter->getOutcomeLabel($order['outcome'])) ?>
+                                    </span>
+                                </td>
+                                <td><?= $escaper->escapeHtml($matchedBy) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php if ($history->getTotalCount() > count($orders)): ?>
+                <?php $shown = __('Showing the latest %1 of %2 orders.', count($orders), $history->getTotalCount()); ?>
+                <p class="bulmeg-history-note"><?= $escaper->escapeHtml($shown) ?></p>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</section>

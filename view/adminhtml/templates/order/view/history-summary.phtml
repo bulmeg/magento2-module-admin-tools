@@ -1,0 +1,28 @@
+<?php
+$viewModel = $block->getData('view_model');
+$formatter = $block->getData('formatter');
+if (!$viewModel instanceof \Bulmeg\AdminTools\ViewModel\CustomerHistory
+    || !$formatter instanceof \Bulmeg\AdminTools\ViewModel\CustomerHistoryFormatter
+) {
+    return;
+}
+$history = $viewModel->getHistory();
+if ($history === null) {
+    return;
+}
+$badgeClass = $formatter->getVerdictBadgeClass($history);
+$otherOrders = __('Other orders: %1', $history->getTotalCount());
+?>
+<tr class="bulmeg-history-summary">
+    <th><?= $escaper->escapeHtml(__('Customer History')) ?></th>
+    <td>
+        <span class="<?= $escaper->escapeHtmlAttr($badgeClass) ?>">
+            <?= $escaper->escapeHtml($formatter->getVerdictLabel($history)) ?>
+        </span>
+        <?php if ($history->getTotalCount() > 0): ?>
+            <a class="bulmeg-history-summary-link" href="#<?= $escaper->escapeHtmlAttr($viewModel->getAnchor()) ?>">
+                <?= $escaper->escapeHtml($otherOrders) ?>
+            </a>
+        <?php endif; ?>
+    </td>
+</tr>

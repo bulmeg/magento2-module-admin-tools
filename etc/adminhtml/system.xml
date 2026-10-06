@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bulmeg" translate="label" sortOrder="400">
+            <label>Bulmeg</label>
+        </tab>
+        <section id="bulmeg_admintools" translate="label" type="text" sortOrder="50"
+                 showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Admin Tools</label>
+            <tab>bulmeg</tab>
+            <resource>Bulmeg_AdminTools::config</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>About</label>
+                <field id="module_info" translate="label" type="label" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module</label>
+                    <frontend_model>Bulmeg\AdminTools\Block\Adminhtml\System\Config\ModuleInfo</frontend_model>
+                </field>
+            </group>
+
+            <group id="phone_search" translate="label comment" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Phone Search in the Order Grid</label>
+                <comment>Sales &gt; Orders. Phone numbers are matched regardless of spaces, dashes, brackets and the country code: 0888 123 456, +359888123456 and 00359 888-123-456 are the same number.</comment>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Phone Search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Adds a "Phone" column with its own filter to the order grid.</comment>
+                </field>
+                <field id="keyword_search" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Search Phones from the Keyword Search Box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When the text typed in the grid's main search box is a phone number (it starts with 0, 00 or +, or is written with spaces or dashes), the grid shows the orders with that phone. Order numbers, names and emails are searched as usual.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="country_code" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Country Calling Code</label>
+                    <comment>Removed from international numbers so that +359 888 123 456 and 0888 123 456 are recognized as the same number. Also used for the customer history.</comment>
+                    <validate>validate-digits</validate>
+                </field>
+            </group>
+
+            <group id="status_color" translate="label comment" type="text" sortOrder="30"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Colored Order Statuses</label>
+                <comment>Colors the "Status" column of the order grid so the state of an order is recognized at a glance. Display only: no order data is changed.</comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Colored Statuses</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="colors" translate="label comment" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Colors</label>
+                    <frontend_model>Bulmeg\AdminTools\Block\Adminhtml\System\Config\Form\Field\StatusColors</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Statuses without a color are shown as usual. Custom statuses can be added too.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="customer_history" translate="label comment" type="text" sortOrder="40"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Customer Order History on the Order Page</label>
+                <comment>When an order is opened, shows whether the customer has ordered before, with a list of the other orders and links to them. A regular customer can be offered a discount; a returning customer whose orders were not completed is flagged as unreliable. Read only: nothing is written to the database.</comment>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Customer History</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Admin users also need the "Bulmeg: Customer Order History" permission (System &gt; User Roles &gt; Sales &gt; Orders &gt; Actions &gt; View).</comment>
+                </field>
+                <field id="match_customer" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Recognize the Customer by Account</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Orders placed from the same customer account.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="match_email" translate="label comment" type="select" sortOrder="22"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Recognize the Customer by Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Orders placed with the same email address, guest orders included.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="match_phone" translate="label comment" type="select" sortOrder="24"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Recognize the Customer by Phone</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Orders with the same billing or shipping phone. The number is compared by its digits, so 0888 123 456 and +359888123456 match.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="reliable_statuses" translate="label comment" type="multiselect" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Successful Order Statuses</label>
+                    <source_model>Bulmeg\AdminTools\Model\Config\Source\OrderStatus</source_model>
+                    <comment>Previous orders in these statuses make the customer a regular one.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="neutral_statuses" translate="label comment" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Statuses Not Counted</label>
+                    <source_model>Bulmeg\AdminTools\Model\Config\Source\OrderStatus</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <comment>Orders in these statuses are listed but neither successful nor problematic, e.g. "Pending" for orders that are still waiting to be processed. Every other status counts as problematic.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="regular_min_orders" translate="label comment" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Regular Customer from</label>
+                    <comment>Number of previous successful orders that makes a customer a regular one.</comment>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="limit" translate="label comment" type="text" sortOrder="60"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Orders to List</label>
+                    <comment>The most recent orders are listed (1 to 100). All of them are counted in the assessment.</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-100</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="ignored_values" translate="label comment" type="textarea" sortOrder="70"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ignored Emails and Phones</label>
+                    <comment>One per line. Shared or placeholder details (e.g. an email used for phone orders, or the shop's own number) would link unrelated customers; such values are not used for matching.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

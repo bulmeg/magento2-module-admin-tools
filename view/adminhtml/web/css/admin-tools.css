@@ -1,0 +1,111 @@
+.bulmeg-status {
+    border: 1px solid;
+    border-radius: 2px;
+    display: block;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 4px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.bulmeg-status-badge {
+    display: inline-block;
+    padding: 1px 8px;
+}
+
+.bulmeg-status-white {
+    background: #ffffff;
+    border-color: #303030;
+    color: #303030;
+}
+
+.bulmeg-status-gray {
+    background: #f1f1f1;
+    border-color: #8a837f;
+    color: #514943;
+}
+
+.bulmeg-status-blue {
+    background: #e5f7fe;
+    border-color: #006bb4;
+    color: #00599b;
+}
+
+.bulmeg-status-green {
+    background: #e5efd4;
+    border-color: #5b8116;
+    color: #185b00;
+}
+
+.bulmeg-status-yellow {
+    background: #fffbbb;
+    border-color: #c7a500;
+    color: #5f4e00;
+}
+
+.bulmeg-status-orange {
+    background: #ffe3c2;
+    border-color: #c25e00;
+    color: #8c3203;
+}
+
+.bulmeg-status-red {
+    background: #fae5e5;
+    border-color: #e22626;
+    color: #b30000;
+}
+
+.bulmeg-status-purple {
+    background: #efe6f8;
+    border-color: #7b3fbf;
+    color: #5a2a91;
+}
+
+.bulmeg-history-summary-link {
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.bulmeg-history .bulmeg-history-verdict {
+    margin-bottom: 12px;
+}
+
+.bulmeg-history .bulmeg-history-note {
+    margin: 0 0 8px;
+}
+
+.bulmeg-history .bulmeg-history-note-warning {
+    color: #8c3203;
+}
+
+.bulmeg-history .bulmeg-history-table {
+    margin-top: 8px;
+}
+
+.bulmeg-history .bulmeg-history-amount {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.bulmeg-history .bulmeg-history-outcome {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.bulmeg-history .bulmeg-history-outcome-successful {
+    color: #185b00;
+}
+
+.bulmeg-history .bulmeg-history-outcome-problematic {
+    color: #b30000;
+}
+
+.bulmeg-history .bulmeg-history-outcome-not_counted {
+    color: #514943;
+}
+
+.bulmeg-history .bulmeg-history-row-problematic > td {
+    background: #fdf2f2;
+}

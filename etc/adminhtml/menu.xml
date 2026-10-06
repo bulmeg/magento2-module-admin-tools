@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Bulmeg_AdminTools::admin_tools"
+             title="Admin Tools"
+             translate="title"
+             module="Bulmeg_AdminTools"
+             sortOrder="50"
+             parent="Bulmeg::bulmeg"
+             resource="Bulmeg_AdminTools::config"/>
+        <add id="Bulmeg_AdminTools::settings"
+             title="Settings"
+             translate="title"
+             module="Bulmeg_AdminTools"
+             sortOrder="10"
+             parent="Bulmeg_AdminTools::admin_tools"
+             action="adminhtml/system_config/edit/section/bulmeg_admintools"
+             resource="Bulmeg_AdminTools::config"/>
+    </menu>
+</config>

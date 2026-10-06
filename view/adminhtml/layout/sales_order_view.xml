@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Bulmeg_AdminTools::css/admin-tools.css"/>
+    </head>
+    <body>
+        <referenceContainer name="extra_customer_info">
+            <block class="Magento\Backend\Block\Template"
+                   name="bulmeg_admintools.customer_history.summary"
+                   template="Bulmeg_AdminTools::order/view/history-summary.phtml"
+                   ifconfig="bulmeg_admintools/customer_history/enabled"
+                   aclResource="Bulmeg_AdminTools::customer_history">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistory</argument>
+                    <argument name="formatter" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistoryFormatter</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="order_additional_info">
+            <block class="Magento\Backend\Block\Template"
+                   name="bulmeg_admintools.customer_history"
+                   template="Bulmeg_AdminTools::order/view/history.phtml"
+                   before="-"
+                   ifconfig="bulmeg_admintools/customer_history/enabled"
+                   aclResource="Bulmeg_AdminTools::customer_history">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistory</argument>
+                    <argument name="formatter" xsi:type="object">Bulmeg\AdminTools\ViewModel\CustomerHistoryFormatter</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="status" class="Bulmeg\AdminTools\Ui\Component\Listing\Column\OrderStatus"/>
+        <column name="bulmeg_telephone" class="Bulmeg\AdminTools\Ui\Component\Listing\Column\Telephone"
+                sortOrder="6">
+            <settings>
+                <filter>text</filter>
+                <sortable>false</sortable>
+                <label translate="true">Phone</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
